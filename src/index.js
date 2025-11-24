@@ -1,10 +1,21 @@
-// require('dotenv').config({path})
+// require('dotenv').config({path: './env'});
 import dotenv from "dotenv";
 
 import connectToDatabase from "./db/index.js";
 dotenv.config({
   path: "./env",
 });
+
+connectToDatabase()
+  .then(() => {
+    app.listen(process.env.PORT || 8000, () => {
+      console.log(`Server is running on port: ${process.env.PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.error("Database connection error:", error);
+  });
+
 // import express from "express";
 // const app = express();
 
